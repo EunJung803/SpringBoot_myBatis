@@ -12,7 +12,13 @@ import java.util.List;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
+    // 게시글 조회
     public List<Article> getArticles() {
         return articleRepository.getArticles();
+    }
+
+    // 게시글 등록
+    public void write(String subject, String content) {
+        articleRepository.write(subject, content);
     }
 }
