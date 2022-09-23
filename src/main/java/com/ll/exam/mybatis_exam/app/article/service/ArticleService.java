@@ -18,7 +18,9 @@ public class ArticleService {
     }
 
     // 게시글 등록
-    public void write(String subject, String content) {
+    public long write(String subject, String content) {
         articleRepository.write(subject, content);
+
+        return articleRepository.getLastInsertId();
     }
 }
