@@ -33,4 +33,11 @@ class AppTest {
 
         assertThat(id).isGreaterThan(0);
     }
+
+    @Test
+    @DisplayName("게시물 단건 조회")
+    void t3() {
+        Article article = articleService.getArticleById(2L);
+        assertThat(article).isNotNull();
+    }
 }

@@ -3,6 +3,7 @@ package com.ll.exam.mybatis_exam.app.article.repository;
 import com.ll.exam.mybatis_exam.app.article.dto.Article;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -28,10 +29,19 @@ public interface ArticleRepository {
             content = #{content}
             </script>
             """)
-    void write(String subject, String content);
+    void write(@Param("subject") String subject, @Param("content") String content);
 
     @Select("""
             SELECT LAST_INSERT_ID()
             """)
     public long getLastInsertId();
+
+    @Select("""
+            <script>
+            SELECT *
+            FROM article
+            WHERE id = #{id}
+            </script>
+            """)
+    Article getArticleById(long id);
 }
