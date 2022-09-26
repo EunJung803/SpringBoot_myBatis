@@ -20,11 +20,14 @@ public class ArticleService {
     // 게시글 등록
     public long write(String subject, String content) {
         articleRepository.write(subject, content);
-
         return articleRepository.getLastInsertId();
     }
 
     public Article getArticleById(long id) {
         return articleRepository.getArticleById(id);
+    }
+
+    public List<Article> search(String kwType, String kw) {
+        return articleRepository.search(kwType, kw);
     }
 }
