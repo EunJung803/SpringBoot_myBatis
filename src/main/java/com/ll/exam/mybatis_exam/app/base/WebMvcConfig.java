@@ -17,10 +17,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         InterceptorRegistration ir;
 
         ir = registry.addInterceptor(beforeActionInterceptor);
-        ir.addPathPatterns("/**");
-        ir.excludePathPatterns("/favicon.ico");
-        ir.excludePathPatterns("/resource/**");
-        ir.excludePathPatterns("/gen/**");
-        ir.excludePathPatterns("/error");
+        ir.addPathPatterns("/**");              // 들어오는 모든 요청에 대해서는 다 인터셉터 적용
+        ir.excludePathPatterns("/favicon.ico"); // 그러나 그 중에서 파비콘을 가져오는 요청 제외,
+        ir.excludePathPatterns("/resource/**"); // 이미지 css 가져오는 요청 제외,
+        ir.excludePathPatterns("/gen/**");      // 고객이 업로드한 파일 요청 제외,
+        ir.excludePathPatterns("/error");       // 에러 관련 요청 제외
     }
 }
