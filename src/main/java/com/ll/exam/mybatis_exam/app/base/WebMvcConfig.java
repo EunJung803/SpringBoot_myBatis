@@ -1,6 +1,7 @@
 package com.ll.exam.mybatis_exam.app.base;
 
 import com.ll.exam.mybatis_exam.interceptor.BeforeActionInterceptor;
+import com.ll.exam.mybatis_exam.interceptor.NeedToLoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
     private final BeforeActionInterceptor beforeActionInterceptor;
+    private final NeedToLoginInterceptor needToLoginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -22,5 +24,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         ir.excludePathPatterns("/resource/**"); // 이미지 css 가져오는 요청 제외,
         ir.excludePathPatterns("/gen/**");      // 고객이 업로드한 파일 요청 제외,
         ir.excludePathPatterns("/error");       // 에러 관련 요청 제외
+
+        ir = registry.addInterceptor(needToLoginInterceptor);
+        ir.addPathPatterns("/article/write");
     }
 }
