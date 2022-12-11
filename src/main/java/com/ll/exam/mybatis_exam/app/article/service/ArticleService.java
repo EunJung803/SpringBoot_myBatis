@@ -17,6 +17,10 @@ public class ArticleService {
         return articleRepository.getArticles();
     }
 
+    public List<Article> getForPrintArticles() {
+        return articleRepository.getForPrintArticles();
+    }
+
     // 게시글 등록
     public long write(String subject, String content) {
         articleRepository.write(subject, content);
