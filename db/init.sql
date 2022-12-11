@@ -53,3 +53,11 @@ SET createDate = NOW(),
     `password` = '{noop}1234',
     `name` = '유저2',
     email = 'user2@test.com';
+
+# 게시물에 작성자 정보 추가
+ALTER TABLE article
+    ADD COLUMN member_id BIGINT UNSIGNED NOT NULL AFTER modifyDate;
+
+# 기존 게시물의 작성자를 user2 로 지정
+UPDATE article
+SET member_id = 2;
