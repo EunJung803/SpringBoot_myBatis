@@ -65,3 +65,24 @@ SET memberId = 2;
 # 게시물에 작성자 정보 필드가 member_id로 설정되었다면 memberId로 변경하기 (camelCase)
 # ALTER TABLE article
 #     CHANGE member_id memberId BIGINT UNSIGNED NOT NULL;
+
+
+# 관리자 회원 추가 과정
+
+# 회원에 권한 정보 추가
+ALTER TABLE `member`
+    ADD COLUMN `roles` CHAR(50) NOT NULL AFTER modifyDate;
+
+# 기존 회원을 일반 회원으로
+UPDATE `member`
+SET roles = 'MEMBER';
+
+# admin 회원 추가
+INSERT INTO `member`
+SET createDate = NOW(),
+    modifyDate = NOW(),
+    roles = 'ADMIN,MEMBER',
+    username = 'admin',
+    `password` = '{noop}1234',
+    `name` = '관리자',
+    email = 'admin@test.com';
