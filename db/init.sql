@@ -56,8 +56,12 @@ SET createDate = NOW(),
 
 # 게시물에 작성자 정보 추가
 ALTER TABLE article
-    ADD COLUMN member_id BIGINT UNSIGNED NOT NULL AFTER modifyDate;
+    ADD COLUMN memberId BIGINT UNSIGNED NOT NULL AFTER modifyDate;
 
 # 기존 게시물의 작성자를 user2 로 지정
 UPDATE article
-SET member_id = 2;
+SET memberId = 2;
+
+# 게시물에 작성자 정보 필드가 member_id로 설정되었다면 memberId로 변경하기 (camelCase)
+# ALTER TABLE article
+#     CHANGE member_id memberId BIGINT UNSIGNED NOT NULL;
